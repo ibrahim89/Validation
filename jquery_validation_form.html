@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Validation</title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+ <div class="container">
+ 	<h1 class="tex-center text-primary">JQUERY VALIDATION FORM</h1>
+ 	<div class="col-lg-8 m-auto d-block">
+ 		<form>
+ 			
+ 			<div class="form-group">
+ 				<label for="user">Username:</label>
+ 				<input type="text" name="username" id="user" autocomplete="off" class="form-control">
+ 				<h5 id="userchk"></h5>
+ 			</div>
+ 			<div class="form-group">
+ 				<label for="pwd">Password:</label>
+ 				<input type="text" name="username" id="pwd"  autocomplete="off" class="form-control">
+ 			   <h5 id="passchk"></h5>
+ 			</div>	
+ 			<div class="form-group">
+ 				<label for="cpwd">Confirm Password:</label>
+ 				<input type="text" name="username" id="cpwd" autocomplete="off" class="form-control">
+ 			    <h5 id="cnfrmchk"></h5>
+ 			</div>
+ 			<input type="submit" id="submitbtn" value="Submit" class="btn btn-primary">
+ 		</form>
+ 	</div>
+ </div>
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+      $('#userchk').hide();
+      $('#passchk').hide();
+      $('#cnfrmchk').hide();
+
+       var user_err = true;
+       var pass_err = true;
+       var compass_err = true;
+
+       $('#user').keyup(function(){
+       	username_check();
+       });
+       function username_check(){
+       	var user_val = $('#user').val();
+       	if(user_val.length == ''){
+       		$('#userchk').show();
+       	     $('#userchk').html("**Please Fill the username");
+       	     $('#userchk').focus();
+       	     $('#userchk').css('color','red');
+       	     user_err = false;
+       	     return false;
+       	}
+       else{
+       	$('#userchk').hide();
+       }
+       if((user_val.length<3) ||(user_val.length>10)){
+       		$('#userchk').show();
+       	     $('#userchk').html("**Username must be between 3 and 8");
+       	     $('#userchk').focus();
+       	     $('#userchk').css('color','red');
+       	      user_err = false;
+       	      return false;
+       }
+        else{
+	     $('#userchk').hide();
+       }
+    }  
+    // validation for password
+    $('#pwd').keyup(function(){
+       password_check();
+    });
+    function password_check(){
+    	var password_val = $('#pwd').val();
+    	if(password_val.length == ''){
+       		$('#passchk').show();
+       	     $('#passchk').html("**Please Fill the password");
+       	     $('#passchk').focus();
+       	     $('#passchk').css('color','red');
+       	     pass_err = false;
+       	     return false;
+       	}
+       else{
+       	$('#passchk').hide();
+       }
+    }
+    $('#cpwd').keyup(function(){
+      confirm_password_check();
+    });
+     function confirm_password_check(){
+     	 var confirm_password_val = $('#cpwd').val();
+     	 	var password_val = $('#pwd').val();
+     	 if(confirm_password_val == ''){
+     	 	$('#cnfrmchk').show();
+       	     $('#cnfrmchk').html("**Please Fill the Confirm Password");
+       	     $('#cnfrmchk').focus();
+       	     $('#cnfrmchk').css('color','red');
+       	     compass_err = false;
+       	 	
+     	 }
+     	 else{
+       	$('#cnfrmchk').hide();
+       }
+       if(confirm_password_val != password_val){
+     	 	$('#cnfrmchk').show();
+       	     $('#cnfrmchk').html("**Password not matched");
+       	     $('#cnfrmchk').focus();
+       	     $('#cnfrmchk').css('color','red');
+       	     compass_err = false;
+       	 	
+     	 }
+     	 else{
+       	$('#cnfrmchk').hide();
+       }
+     }
+ 	});
+ </script>
+</body>
+</html>
